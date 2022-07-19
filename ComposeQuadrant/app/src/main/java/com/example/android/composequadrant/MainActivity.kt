@@ -47,89 +47,62 @@ fun ComposeQuadrant() {
         Row(
             modifier = Modifier.weight(1.0f, true)
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .weight(1.0f, true)
-                    .background(Color.Green)
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                Text(
-                    text = stringResource(R.string.t1),
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Justify
-                )
-                Text(
-                    text = stringResource(R.string.t2),
-                    textAlign = TextAlign.Justify,
-                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
-                )
-            }
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .weight(1.0f, true)
-                    .background(Color.Yellow)
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                Text(
-                    text = stringResource(R.string.t3),
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = stringResource(R.string.t4), textAlign = TextAlign.Justify,
-                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
-                )
-            }
+            ComposeInfoCard(
+                title = stringResource(id = R.string.t1),
+                desc = stringResource(id = R.string.t2),
+                backgroundColor = Color.Green,
+                modifier = Modifier.weight(1.0f)
+            )
+            ComposeInfoCard(
+                title = stringResource(id = R.string.t3),
+                desc = stringResource(id = R.string.t4),
+                backgroundColor = Color.Yellow,
+                modifier = Modifier.weight(1.0f)
+            )
         }
         Row(
             modifier = Modifier.weight(1.0f, true)
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .weight(1.0f, true)
-                    .background(Color.Cyan)
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                Text(
-                    text = stringResource(R.string.t5),
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = stringResource(R.string.t6), textAlign = TextAlign.Justify,
-                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
-                )
-            }
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .weight(1.0f, true)
-                    .background(Color.LightGray)
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            ) {
-                Text(
-                    text = stringResource(R.string.t7),
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = stringResource(R.string.t8), textAlign = TextAlign.Justify,
-                    modifier = Modifier.padding(start = 8.dp, end = 8.dp)
-                )
-            }
+            ComposeInfoCard(
+                title = stringResource(id = R.string.t5),
+                desc = stringResource(id = R.string.t6),
+                backgroundColor = Color.Cyan,
+                modifier = Modifier.weight(1.0f)
+            )
+            ComposeInfoCard(
+                title = stringResource(id = R.string.t7),
+                desc = stringResource(id = R.string.t8),
+                backgroundColor = Color.LightGray,
+                modifier = Modifier.weight(1.0f)
+            )
         }
+    }
+}
+
+@Composable
+fun ComposeInfoCard(
+    title: String,
+    desc: String,
+    backgroundColor: Color,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .background(backgroundColor)
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = title,
+            modifier = Modifier.padding(bottom = 16.dp),
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = desc, textAlign = TextAlign.Justify
+        )
     }
 }
 
