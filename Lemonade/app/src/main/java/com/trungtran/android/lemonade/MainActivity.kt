@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -36,19 +37,22 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LemondadeApp() {
-    CardButton(modifier = Modifier
-        .fillMaxSize()
-        .wrapContentSize(Alignment.Center))
+    CardButton(
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun CardButton(modifier: Modifier = Modifier) {
+    var squeezeCount by rememberSaveable { mutableStateOf((1..10).random()) }
     var stepIdx by rememberSaveable { mutableStateOf(0) }
     val steps: Array<String> = stringArrayResource(id = R.array.lemonade_steps)
     val stepsDesc: Array<String> = stringArrayResource(id = R.array.lemonade_steps_desc)
 
-    val img = when(stepIdx) {
+    val img = when (stepIdx) {
         0 -> R.drawable.lemon_tree
         1 -> R.drawable.lemon_squeeze
         2 -> R.drawable.lemon_drink
@@ -65,6 +69,32 @@ fun CardButton(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Image(painter = painterResource(id = img), contentDescription = stepsDesc[stepIdx],
-        modifier = Modifier.border(2.dp, color = Color(105,205, 216)))
+            modifier = Modifier
+                .border(
+                    2.dp, color = Color(
+                        getRandomColorLevel(), getRandomColorLevel(), getRandomColorLevel()
+                    )
+                )
+                .clickable {
+                    if (stepIdx == 1) {
+                        squeezeCount--
+                        if (squeezeCount == 0) {
+                            squeezeCount = (1..10).random()
+                            stepIdx = 2;
+                        }
+                    } else {
+                        stepIdx = (stepIdx + 1) % 4
+                    }
+                })
+        if (stepIdx == 1) {
+            Spacer(modifier = Modifier.height(50.dp))
+            Text(
+                text = "Squeeze: $squeezeCount"
+            )
+        }
     }
+}
+
+fun getRandomColorLevel(): Int {
+    return (0..255).random()
 }
