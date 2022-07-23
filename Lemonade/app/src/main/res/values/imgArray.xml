@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="images">
+        <item>@drawable/lemon_tree</item>
+        <item>@drawable/lemon_squeeze</item>
+        <item>@drawable/lemon_drink</item>
+        <item>@drawable/lemon_restart</item>
+    </array>
+</resources>
