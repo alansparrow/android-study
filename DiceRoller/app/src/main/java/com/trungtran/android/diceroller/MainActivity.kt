@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -38,7 +39,7 @@ fun DiceRollApp() {
 @Preview(showBackground = true)
 @Composable
 fun DiceWithButtonImage(modifier: Modifier = Modifier) {
-    var result by remember { mutableStateOf(1) }
+    var result by rememberSaveable { mutableStateOf(1) }
 
     val imgRes = when(result) {
         1 -> R.drawable.dice_1
