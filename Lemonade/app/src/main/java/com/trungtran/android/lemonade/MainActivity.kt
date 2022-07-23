@@ -7,8 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,22 +34,24 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun LemondadeApp() {
     CardButton(
+        stringArrayResource(id = R.array.lemonade_steps),
+        stringArrayResource(id = R.array.lemonade_steps_desc),
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)
     )
 }
 
-@Preview(showBackground = true)
+
 @Composable
-fun CardButton(modifier: Modifier = Modifier) {
+fun CardButton(steps: Array<String>, stepsDesc: Array<String>, modifier: Modifier = Modifier) {
     var squeezeCount by rememberSaveable { mutableStateOf((1..10).random()) }
     var stepIdx by rememberSaveable { mutableStateOf(0) }
-    val steps: Array<String> = stringArrayResource(id = R.array.lemonade_steps)
-    val stepsDesc: Array<String> = stringArrayResource(id = R.array.lemonade_steps_desc)
+
 
     val img = when (stepIdx) {
         0 -> R.drawable.lemon_tree
@@ -73,7 +74,8 @@ fun CardButton(modifier: Modifier = Modifier) {
                 .border(
                     2.dp, color = Color(
                         getRandomColorLevel(), getRandomColorLevel(), getRandomColorLevel()
-                    )
+                    ),
+                    shape = RoundedCornerShape(4.dp)
                 )
                 .clickable {
                     if (stepIdx == 1) {
