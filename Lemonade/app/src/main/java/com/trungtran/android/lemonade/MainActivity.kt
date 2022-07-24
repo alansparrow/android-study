@@ -19,8 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.trungtran.android.lemonade.ui.theme.LemonadeTheme
 
 class MainActivity : ComponentActivity() {
@@ -66,7 +68,9 @@ fun CardButton(steps: Array<String>, stepsDesc: Array<String>, modifier: Modifie
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = steps[stepIdx]
+            text = steps[stepIdx],
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(16.dp))
         Image(painter = painterResource(id = img), contentDescription = stepsDesc[stepIdx],
