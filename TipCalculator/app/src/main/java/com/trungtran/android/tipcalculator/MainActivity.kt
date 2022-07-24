@@ -28,7 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import java.text.NumberFormat
-import kotlin.math.round
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +51,13 @@ fun TipTimeScreen() {
     val focusManager = LocalFocusManager.current
     var amountInput by rememberSaveable { mutableStateOf("") }
     var tipInput by rememberSaveable { mutableStateOf("") }
+    var numberOfPeopleInput by rememberSaveable { mutableStateOf("1") }
     var roundUp by rememberSaveable { mutableStateOf(false) }
 
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount, tipPercent, roundUp)
+    val numberOfPeople = numberOfPeopleInput.toIntOrNull() ?: 1
+    val tip = calculateTip(amount, tipPercent, roundUp, numberOfPeople)
 
     Column(
         modifier = Modifier.padding(32.dp),
@@ -84,6 +85,18 @@ fun TipTimeScreen() {
             label = R.string.how_was_the_service,
             value = tipInput,
             onValueChange = { tipInput = it },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Down) }
+            )
+        )
+        EditNumberField(
+            label = R.string.number_of_people,
+            value = numberOfPeopleInput,
+            onValueChange = { numberOfPeopleInput = it },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
@@ -154,9 +167,10 @@ fun RoundTheTipRow(
 private fun calculateTip(
     amount: Double,
     tipPercent: Double = 15.0,
-    roundUp: Boolean = false
+    roundUp: Boolean = false,
+    numberOfPeople: Int = 1
 ): String {
-    var tip = tipPercent / 100.0 * amount
+    var tip = (tipPercent / 100.0 * amount) / numberOfPeople
     if (roundUp) {
         tip = kotlin.math.ceil(tip)
     }
