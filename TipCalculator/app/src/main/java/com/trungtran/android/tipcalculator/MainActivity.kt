@@ -57,6 +57,9 @@ fun TipTimeScreen() {
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
     val numberOfPeople = numberOfPeopleInput.toIntOrNull() ?: 1
+    if (numberOfPeople <= 0) {
+        numberOfPeopleInput = "1"
+    }
     val tip = calculateTip(amount, tipPercent, roundUp, numberOfPeople)
 
     Column(
