@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -165,7 +166,8 @@ fun RoundTheTipRow(
             onCheckedChange = onRoundUpChanged,
             modifier = modifier
                 .fillMaxWidth()
-                .wrapContentWidth(Alignment.End),
+                .wrapContentWidth(Alignment.End)
+                .testTag("roundUpSwitcher"),
             colors = SwitchDefaults.colors(
                 uncheckedThumbColor = Color.DarkGray
             )
