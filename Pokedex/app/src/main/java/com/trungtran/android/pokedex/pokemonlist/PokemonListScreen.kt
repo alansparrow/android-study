@@ -169,3 +169,33 @@ fun PokedexEntry(
         }
     }
 }
+
+@Composable
+fun PokedexRow(
+    rowIndex: Int,
+    entries: List<PokedexListEntry>,
+    navController: NavController
+) {
+    Column {
+        Row {
+            if (rowIndex * 2 < entries.size) {
+                PokedexEntry(
+                    entry = entries[rowIndex * 2],
+                    navController = navController,
+                    modifier = Modifier.weight(1f)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                if (rowIndex * 2 + 1 < entries.size) {
+                    PokedexEntry(
+                        entry = entries[rowIndex * 2 + 1],
+                        navController = navController,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+    }
+}
