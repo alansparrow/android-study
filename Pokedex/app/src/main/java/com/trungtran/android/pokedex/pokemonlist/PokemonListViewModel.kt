@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import androidx.compose.runtime.mutableStateOf
 import androidx.palette.graphics.Palette
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.capitalize
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trungtran.android.pokedex.data.models.PokedexListEntry
@@ -29,6 +28,10 @@ class PokemonListViewModel @Inject constructor(
     var loadError = mutableStateOf("")
     var isLoading = mutableStateOf(false)
     var endReached = mutableStateOf(false)
+
+    init {
+        loadPokemonPaginated()
+    }
 
     fun loadPokemonPaginated() {
         viewModelScope.launch {
