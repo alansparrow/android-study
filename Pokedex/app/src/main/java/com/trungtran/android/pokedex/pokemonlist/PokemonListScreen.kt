@@ -1,6 +1,5 @@
 package com.trungtran.android.pokedex.pokemonlist
 
-import android.view.RoundedCorner
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,7 +13,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -33,11 +31,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.navigate
 import coil.request.ImageRequest
 import com.google.accompanist.coil.CoilImage
 import com.trungtran.android.pokedex.R
 import com.trungtran.android.pokedex.data.models.PokedexListEntry
-import com.trungtran.android.pokedex.data.remote.responses.PokemonList
 import com.trungtran.android.pokedex.ui.theme.RobotoCondensed
 
 @Composable
@@ -66,6 +64,7 @@ fun PokemonListScreen(
 
             }
             Spacer(modifier = Modifier.height(16.dp))
+            PokemonList(navController = navController)
         }
     }
 }
@@ -95,7 +94,7 @@ fun SearchBar(
                 .background(Color.White, CircleShape)
                 .padding(horizontal = 20.dp, vertical = 12.dp)
                 .onFocusChanged {
-                    isHintDisplayed = !it.isFocused && text.isEmpty()
+                    isHintDisplayed = it != FocusState.Active && text.isEmpty()
                 }
         )
         if (isHintDisplayed) {
